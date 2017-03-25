@@ -1,0 +1,2 @@
+# generator-rncomponent
+generator-rncomponent
