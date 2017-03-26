@@ -6,6 +6,19 @@ const mkdirp = require('mkdirp');
 var path = require('path');
 
 module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+
+    // This makes `appname` a required argument.
+    this.argument('appname', {
+      type: String,
+      required: true
+    });
+
+    // And you can then access it later; e.g.
+    this.log(this.options.appname);
+  }
+
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -13,10 +26,11 @@ module.exports = class extends Generator {
     ));
     // this.name = path.basename(process.cwd());
     this.name = '';
+
     const prompts = [{
       name: 'name',
-      message: 'What would you like to call this component?',
-      default: this.name
+      message: 'Your folder name?',
+      default: this.options.appname
     }];
 
     return this.prompt(prompts).then(props => {
