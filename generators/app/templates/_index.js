@@ -3,7 +3,7 @@ import Text from 'Text';
 import View from 'View';
 // 自定义
 import styles from './styles';
-export default class ActionSheet extends Component {
+export default class <%=className%> extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     style: View.propTypes.style

@@ -3,7 +3,8 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 const mkdirp = require('mkdirp');
-var path = require('path');
+const path = require('path');
+const _s = require('underscore.string');
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -37,6 +38,7 @@ module.exports = class extends Generator {
       // To access props later use this.props.someAnswer;
       this.props = props;
       this.name = props.name;
+      this.className = props.name;
     });
   }
 
@@ -45,14 +47,18 @@ module.exports = class extends Generator {
       mkdirp(this.name);
     }
 
-    this.fs.copy(
-      this.templatePath('index.js'),
-      this.destinationPath(path.join(this.name, 'index.js'))
+    this.fs.copyTpl(
+      this.templatePath('_index.js'),
+      this.destinationPath(path.join(this.name, 'index.js')), {
+        className: _s.capitalize(this.name)
+      }
     );
+
     this.fs.copy(
       this.templatePath('style.scss'),
       this.destinationPath(path.join(this.name, 'style.scss'))
     );
+
     this.fs.copy(
       this.templatePath('style.js'),
       this.destinationPath(path.join(this.name, 'style.js'))
