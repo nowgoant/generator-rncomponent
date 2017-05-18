@@ -1,4 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+/**
+ * Created by majun36 on <%=dateTime%>.
+ * @flow
+ */
+import React, { Component, PropTypes } from 'react';
 import Text from 'Text';
 import View from 'View';
 // 自定义

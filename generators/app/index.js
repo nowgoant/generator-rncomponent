@@ -6,6 +6,7 @@ const mkdirp = require('mkdirp');
 const path = require('path');
 const _s = require('underscore.string');
 
+
 module.exports = class extends Generator {
   constructor(args, opts) {
     super(args, opts);
@@ -46,22 +47,23 @@ module.exports = class extends Generator {
     if (this.name) {
       mkdirp(this.name);
     }
-
+    var date = new Date();
     this.fs.copyTpl(
       this.templatePath('_index.js'),
       this.destinationPath(path.join(this.name, 'index.js')), {
-        className: _s.capitalize(this.name)
+        className: _s.capitalize(this.name),
+        dateTime: date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDay()
       }
     );
 
     this.fs.copy(
       this.templatePath('style.scss'),
-      this.destinationPath(path.join(this.name, 'style.scss'))
+      this.destinationPath(path.join(this.name, 'index.style.scss'))
     );
 
     this.fs.copy(
       this.templatePath('style.js'),
-      this.destinationPath(path.join(this.name, 'style.js'))
+      this.destinationPath(path.join(this.name, 'index.style.js'))
     );
   }
 };
